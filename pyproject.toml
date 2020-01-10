@@ -1,0 +1,38 @@
+[tool.poetry]
+name = "package"
+version = "1.0.0"
+description = "A template python package."
+
+license = "MIT"
+
+authors = [
+    "Martin Howarth <howarth.martin@gmail.com>"
+]
+
+readme = 'README.md'
+
+repository = "https://github.com/MartinHowarth/python-template-repository"
+homepage = "https://github.com/MartinHowarth/python-template-repository"
+
+keywords = []
+
+[tool.poetry.dependencies]
+python = "^3.8"
+toml = "^0.9"
+
+[tool.poetry.dev-dependencies]
+black = "^19.10b0"
+flake8 = "^3.7.9"
+pydocstyle = "^5.0.1"
+mypy = "^0.750"
+pytest = "^5.3.1"
+pytest-subtests = "^0.2.1"
+mock = "^3.0.5"
+pytest-mock = "^1.13.0"
+
+[tool.pytest]
+mock_use_standalone_module = true
+
+[build-system]
+requires = ["poetry>=1.0.0"]
+build-backend = "poetry.masonry.api"

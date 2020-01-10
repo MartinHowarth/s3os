@@ -1,0 +1,126 @@
+name: Test
+
+on: [push]
+
+env:
+  TEST_DIRS: "tests"
+  LINT_DIRS: "package tests"
+
+jobs:
+
+  black:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install poetry
+        uses: dschep/install-poetry-action@v1.3
+        with:
+          version: 1.0.0
+          create_virtualenvs: true
+
+      - name: Install requirements
+        run: poetry install
+
+      - name: Run pydocstyle
+        run: poetry run black --check ${LINT_DIRS}
+
+  flake8:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install poetry
+        uses: dschep/install-poetry-action@v1.3
+        with:
+          version: 1.0.0
+          create_virtualenvs: true
+
+      - name: Install requirements
+        run: poetry install
+
+      - name: Run pydocstyle
+        run: poetry run flake8 --count --max-line-length=127 --statistics ${LINT_DIRS}
+
+  mypy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install poetry
+        uses: dschep/install-poetry-action@v1.3
+        with:
+          version: 1.0.0
+          create_virtualenvs: true
+
+      - name: Install requirements
+        run: poetry install
+
+      - name: Run pydocstyle
+        run: poetry run mypy ${LINT_DIRS}
+
+  pydocstyle:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v1
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install poetry
+        uses: dschep/install-poetry-action@v1.3
+        with:
+          version: 1.0.0
+          create_virtualenvs: true
+
+      - name: Install requirements
+        run: poetry install
+
+      - name: Run pydocstyle
+        run: poetry run pydocstyle ${LINT_DIRS}
+
+  pytest:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, ubuntu-18.04]
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.8
+
+      - name: Install poetry
+        uses: dschep/install-poetry-action@v1.3
+        with:
+          version: 1.0.0
+          create_virtualenvs: true
+
+      - name: Install requirements
+        run: poetry install
+
+      - name: Run pytest
+        run: poetry run pytest ${TEST_DIRS}
+        env:
+          SKIP_GUI_TESTS: 1
