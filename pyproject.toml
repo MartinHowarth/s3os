@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "s3os"
 version = "1.0.0"
-description = "S3 Object Store. Store and retrieve python objects in s3 simply.."
+description = "S3 Object Store. Store and retrieve python objects in s3 simply."
 
 license = "MIT"
 
