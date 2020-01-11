@@ -4,7 +4,7 @@ on: [push]
 
 env:
   TEST_DIRS: "tests"
-  LINT_DIRS: "package tests"
+  LINT_DIRS: "s3os tests"
 
 jobs:
 
@@ -124,3 +124,6 @@ jobs:
         run: poetry run pytest ${TEST_DIRS}
         env:
           SKIP_GUI_TESTS: 1
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
